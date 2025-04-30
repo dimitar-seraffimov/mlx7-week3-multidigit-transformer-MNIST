@@ -1,0 +1,5 @@
+.venv
+wandb
+__pycache__
+*.pth
+data
