@@ -66,11 +66,6 @@ class MNISTDataset(torch.utils.data.Dataset):
     
     self.images = df["image"]
     self.labels = df["label"].tolist()
-    self.linear = nn.Linear(PATCH_SIZE * PATCH_SIZE, EMBED_DIM)
-
-    torch.manual_seed(42) 
-    self.positional_encoding = torch.randn(N_PATCHES + 1, EMBED_DIM) # +1 for the [CLS] token
-    self.cls_token = nn.Parameter(torch.randn(1, EMBED_DIM)) # learnable [CLS] token
 
   def __len__(self):
     return len(self.images)
@@ -84,17 +79,7 @@ class MNISTDataset(torch.utils.data.Dataset):
     patches = img_tensor.unfold(0, PATCH_SIZE, PATCH_SIZE).unfold(1, PATCH_SIZE, PATCH_SIZE)
     patches = patches.contiguous().view(-1, PATCH_SIZE * PATCH_SIZE) # flatten each patch into a vector of size 49, shape: (16, 49)
 
-    # embed eeach patch
-    embedded = self.linear(patches) # shape: (16, 32)
-
-    # add cls token
-    cls_token = self.cls_token.expand(1, -1) # shape: (1, 32)
-    embedded = torch.cat([cls_token, embedded], dim=0) # shape: (17, 32)
-
-    # add positional encodings
-    embedded = embedded + self.positional_encoding # shape: (17, 32)
-
-    return embedded, self.labels[idx]
+    return patches, self.labels[idx]
 
 #
 #
@@ -105,4 +90,4 @@ class MNISTDataset(torch.utils.data.Dataset):
 if __name__ == "__main__":
   dataset = MNISTDataset(split="train")
   x, y = dataset[0]
-  print(f"Embedded shape: {x.shape}, Label: {y}") # (17, 32), Label: int
+  print(f"Embedded shape: {x.shape}, Label: {y}") # (16, 32), Label: int

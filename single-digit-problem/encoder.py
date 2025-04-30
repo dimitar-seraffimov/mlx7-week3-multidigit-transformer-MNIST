@@ -9,11 +9,11 @@ import torch.nn.functional as F
 #
 
 BATCH_SIZE = 32 # number of images in each training batch, sanity check = 32 * 1875 = 60000
-NUM_LAYERS = 6 # number of encoder blocks
+NUM_LAYERS = 1 # number of encoder blocks
 NUM_HEADS = 4 # number of attention heads
 EMBED_DIM = 32
 HIDDEN_DIM = 24
-NUM_PATCHES = 17 # 16 patches + 1 [CLS] token
+NUM_PATCHES = 16 # 16 patches
 
 #
 #
@@ -104,6 +104,10 @@ class TransformerEncoder(nn.Module):
     """
 
     super().__init__()
+
+    # learnable positional encodings for each patch
+    self.positional_encoding = nn.Parameter(torch.randn(1, NUM_PATCHES, EMBED_DIM)) 
+
     self.layers = nn.ModuleList(
       EncoderBlock(embed_dim, hidden_dim, num_heads) for _ in range(num_layers)
     )
@@ -113,6 +117,9 @@ class TransformerEncoder(nn.Module):
     x: tensor of shape (batch_size, n_patches, embed_dim)
     return: same shape as input
     """
+
+    # positional encodings to each patch
+    x = x + self.positional_encoding
 
     for layer in self.layers:
       x = layer(x)

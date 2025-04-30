@@ -53,7 +53,7 @@ def train_classifier(model, dataloader, optimizer, criterion, epoch):
 
     total_loss += loss.item()
     wandb.log({"loss": loss.item(), "epoch": epoch + 1})
-
+    
     progress_bar.set_postfix({"loss": loss.item()})
 
   avg_loss = total_loss / len(dataloader)
@@ -90,6 +90,7 @@ if __name__ == "__main__":
   # initialise encoder
   encoder = TransformerEncoder(NUM_LAYERS, EMBED_DIM, HIDDEN_DIM, NUM_HEADS).to(device)
   model = MNISTClassifier(encoder).to(device)
+  wandb.watch(model, log="all") # log all gradients and parameters
 
   # initialise loss function and optimizer
   optimizer = torch.optim.Adam(model.parameters(), lr=LR)
