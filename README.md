@@ -13,7 +13,7 @@ I have divided the progress in three steps:
     - Read the 'Attention Is All You Need' paper and understand each individual component of the Transformer.
     - Build an encoder to solve the classification problem for predicting a single digit from an image using just an encoder.
     Task:
-    ![Encoder Diagram - Problem 1](single-digit-problem/encoder_step1.png)
+![Encoder Diagram - Problem 1](single-digit-problem/encoder_step1.png)
     Prediction results:
-    ![Prediction results - 10 digits](single-digit-problem/Figure_1.png)
+![Prediction results - 10 digits](single-digit-problem/Figure_1.png)
     - Build an encoder-decoder Transformer to solve the problem for an n number of digits scattered (randomly) around a canvas.
