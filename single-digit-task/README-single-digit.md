@@ -3,7 +3,6 @@ Step 01:
 s01_mnist_dataset.py
 
     Internal functionality:
-
         - download MNIST parquet files from HuggingFace - https://huggingface.co/datasets/ylecun/mnist/tree/main/mnist
         - convert 28x28 images to 16 patches (7x7 each)
         - flatten each patch (1x49)
@@ -16,7 +15,6 @@ Step 02:
 s02_train_classifier.py
 
     Internal functionality:
-
         - load the MNIST data (already patch-embedded with positional encoding)
         - pass each batch through the encoder stack, number of encoder blocks = 6 (defined at NUM_LAYERS)
         - aggregate patch-level embeddings to form a single image-level representation
@@ -26,7 +24,6 @@ s02_train_classifier.py
 s03_inference.py:
 
     Internal functionality:
-
         - load the saved model
         - load a single image
         - preprocess it just like training
