@@ -18,7 +18,7 @@ s02_train_classifier.py
     Internal functionality:
 
         - load the MNIST data (already patch-embedded with positional encoding)
-        - pass each batch through the encoder stack
+        - pass each batch through the encoder stack, number of encoder blocks = 6 (defined at NUM_LAYERS)
         - aggregate patch-level embeddings to form a single image-level representation
         - apply a classifier (nn.Linear(EMBED_DIM, 10)) to predict the digit (0–9)
         - train with standard cross-entropy loss
@@ -48,8 +48,8 @@ encoder.py
     - use residual connections and layer normalization after both attention and FFN
     - stack multiple encoder blocks (in this example code -> 6 layers) using nn.ModuleList
 
-    - accepts input of shape (batch_size, num_patches+1, embed_dim) (includes [CLS] token)
-    return: encoded representation of the input sequence with same shape (B, 17, 32)
+    - accepts input of shape (batch_size, num_patches, embed_dim)
+    return: encoded representation of the input sequence with same shape (B, 16, 32)
 
 evaluate.py
 

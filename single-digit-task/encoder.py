@@ -9,7 +9,7 @@ import torch.nn.functional as F
 #
 
 BATCH_SIZE = 32 # number of images in each training batch, sanity check = 32 * 1875 = 60000
-NUM_LAYERS = 1 # number of encoder blocks
+NUM_LAYERS = 6 # number of encoder blocks
 NUM_HEADS = 4 # number of attention heads
 EMBED_DIM = 32
 HIDDEN_DIM = 24
