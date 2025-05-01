@@ -14,7 +14,7 @@ from tqdm import tqdm
 
 #
 #
-# CONSTANTS
+# CONFIG
 #
 #
 
