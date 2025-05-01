@@ -155,7 +155,7 @@ class MultiDigitDataset(Dataset):
     label_seq = [label_to_index["<sos>"]] + label_ids + [label_to_index["<eos>"]]
     label_tensor = torch.tensor(label_seq, dtype=torch.long)
 
-    return patches, label_tensor
+    return patches, label_tensor, composed_img # return composed image for visualization in s03_inference.py
 
 #
 #
