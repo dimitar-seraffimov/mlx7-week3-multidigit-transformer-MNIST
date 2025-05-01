@@ -79,5 +79,6 @@ s03_inference.py:
         - input image (56×56)
         - print digit sequence below the image
         - ground truth label below for comparison
-    EXAMPLE:
-    ![Prediction results - 8 digits](multi_digit_task/progress_imgs/inference.png)
+
+EXAMPLE:
+![Prediction results - 8 digits](progress_imgs/inference.png)
